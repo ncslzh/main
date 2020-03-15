@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.cardcommands;
 
+<<<<<<< HEAD
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -23,11 +24,28 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits the details of an existing person in the address book.
+=======
+import static java.util.Objects.requireNonNull;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.deck.card.Card;
+
+import java.util.List;
+
+/**
+ * Edits a card in the deck.
+>>>>>>> b759adc08096c8661fd321a19929122145affe9f
  */
 public class EditCardCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+<<<<<<< HEAD
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -58,11 +76,31 @@ public class EditCardCommand extends Command {
 
         this.index = index;
         this.editPersonDescriptor = new EditCommand.EditPersonDescriptor(editPersonDescriptor);
+=======
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits a card in the current deck. "
+            + "Parameters: "
+            + "INDEX (must be a positive integer) "
+            + "FRONT:BACK\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "1 "
+            + "ありがとう:thanks";
+
+    public static final String MESSAGE_SUCCESS = "Card edited: %1$s";
+
+    private final Index targetIndex;
+    private final Card editedCard;
+
+    public EditCardCommand(Index targetIndex, Card editedCard) {
+        this.targetIndex = targetIndex;
+        this.editedCard = editedCard;
+>>>>>>> b759adc08096c8661fd321a19929122145affe9f
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+<<<<<<< HEAD
         List<Deck> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -95,10 +133,23 @@ public class EditCardCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(deckToEdit.getTags());
 
         return new Deck(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+=======
+
+        List<Card> lastShownList = model.getFilteredCardList();
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
+        }
+
+        Card oldCard = lastShownList.get(targetIndex.getZeroBased());
+
+        model.replaceCard(oldCard, editedCard);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedCard));
+>>>>>>> b759adc08096c8661fd321a19929122145affe9f
     }
 
     @Override
     public boolean equals(Object other) {
+<<<<<<< HEAD
         // short circuit if same object
         if (other == this) {
             return true;
@@ -214,4 +265,10 @@ public class EditCardCommand extends Command {
         }
     }
 
+=======
+        return other == this // short circuit if same object
+                || (other instanceof EditCardCommand // instanceof handles nulls
+                && targetIndex.equals(((EditCardCommand) other).targetIndex)); // state check
+    }
+>>>>>>> b759adc08096c8661fd321a19929122145affe9f
 }

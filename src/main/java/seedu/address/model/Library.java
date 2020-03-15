@@ -5,10 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.deck.Deck;
-import seedu.address.model.deck.card.Card;
 import seedu.address.model.deck.UniqueDeckList;
-import seedu.address.model.deck.card.UniqueCardList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,7 +17,6 @@ public class Library implements ReadOnlyLibrary {
 
 
     private final UniqueDeckList decks;
-    private final UniqueCardList cards;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,7 +27,6 @@ public class Library implements ReadOnlyLibrary {
      */
     {
         decks = new UniqueDeckList();
-        cards = new UniqueCardList();
     }
 
     public Library() {}
@@ -85,6 +82,16 @@ public class Library implements ReadOnlyLibrary {
         return decks.contains(deck);
     }
 
+    public Deck getDeck(int index) {
+        return decks.get(index);
+    }
+
+    public Deck getDeck(Index index) {
+        int idxInInt = Integer.parseInt(index.toString());
+        return decks.get(idxInInt);
+
+    }
+
     /**
      * Adds a deck to the library.
      * The deck must not already exist in the library.
@@ -119,31 +126,6 @@ public class Library implements ReadOnlyLibrary {
     }
 
 
-    /**
-     * Returns true if a card with the same identity as {@code card} exists in the deck.
-     */
-    public boolean hasCard(Card card) {
-        requireNonNull(card);
-        return cards.contains(card);
-    }
-
-    /**
-     * Adds a card to the deck.
-     * The card must not already exist in the deck.
-     */
-    public void addCard(Card card) {
-        cards.add(card);
-    }
-
-    /**
-     * Removes {@code key} from this {@code Deck}.
-     * {@code key} must exist in the deck .
-     */
-    public void removeCard(Card key) {
-        cards.remove(key);
-    }
-
-    //// util methods
 
     @Override
     public String toString() {
