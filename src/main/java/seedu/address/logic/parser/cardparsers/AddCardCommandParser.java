@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.cardparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.cardcommands.AddCardCommand;
 import seedu.address.logic.commands.dump.AddCommand;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.card.BackFace;
