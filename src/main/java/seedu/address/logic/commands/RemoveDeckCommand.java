@@ -14,7 +14,7 @@ import seedu.address.model.deck.Deck;
 /**
  * Adds a person to the address book.
  */
-public class DeleteDeckCommand extends Command {
+public class RemoveDeckCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -41,7 +41,7 @@ public class DeleteDeckCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public DeleteDeckCommand(Deck deck) {
+    public RemoveDeckCommand(Deck deck) {
         requireNonNull(deck);
         toAdd = deck;
     }
@@ -61,7 +61,7 @@ public class DeleteDeckCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteDeckCommand // instanceof handles nulls
-                && toAdd.equals(((DeleteDeckCommand) other).toAdd));
+                || (other instanceof RemoveDeckCommand // instanceof handles nulls
+                && toAdd.equals(((RemoveDeckCommand) other).toAdd));
     }
 }
